@@ -1,0 +1,9 @@
+{
+  "note": "A starting set for work on a house or land. Copy into a work folder as chat_terms.json and edit: subject words say what the matter is about, tier words say how far the talk went.",
+  "subject": ["\\broof", "shingle", "driveway", "\\bpav", "asphalt", "plumb", "\\bpipe", "electric", "\\bpanel\\b", "\\bwiring", "\\btree", "\\bfenc", "septic", "furnace", "propane", "contractor", "repair", "remodel", "\\bdeck\\b", "window", "flooring", "\\bpaint", "appliance", "property tax", "insurance", "\\brent\\b", "tenant"],
+  "tiers": [
+    {"tier": "A", "name": "paid or hired", "patterns": ["\\bpaid\\b", "\\bpay(ment)?\\b", "invoice", "receipt", "deposit", "\\bhired?\\b", "booked", "go ahead", "\\bsent\\b.{0,20}\\$", "venmo", "zelle", "\\bcheck\\b", "balance due", "\\bis done\\b", "finished"]},
+    {"tier": "B", "name": "asked or quoted", "patterns": ["quote", "estimate", "how much", "\\bbid\\b", "\\$\\s?\\d", "price", "cost"]}
+  ],
+  "context_tier": {"tier": "C", "name": "subject words only"}
+}

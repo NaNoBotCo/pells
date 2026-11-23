@@ -1,0 +1,18 @@
+# Pells · เพลส์
+
+Bank and card statements in. A ledger checked against the printed balances, and a numbered set of pages for the other side, out. A kit for a Mac (Python 3.9, pypdf, reportlab), in English and Thai. This page shows it on a fictional matter, Doe v. Roe Holdings, LLC.
+
+- Reads the page, not the file name: each line is filed under the account and period printed on its own page, so a bundle of two accounts, a repeat download or an absent month shows up as what it is.
+- Checks the arithmetic: opening balance plus the lines against the closing balance printed on each statement; the index says "reconciled" or "off by" an amount.
+- Lists what it did not read: scans with no text layer, copies of another file, pages with amounts that match no layout.
+- Piles: word matches (utilities, building trades, cash, checks) as reasons to read a line; marks of produce, leave out or come back carry across rebuilds.
+- Production: pages that carry a marked line get a Bates number, with an index tying each number to its source file and page and SHA-256 hashes of source and output.
+- Receipts paired to ledger lines by amount and date; chat exports searched by subject words and sorted into tiers; a search log with one entry per thing read.
+- A statement layout is one JSON file per bank.
+
+Pages are stamped as they are in the source. Pells does not redact.
+
+Kit: https://github.com/NaNoBotCo/pells
+Sibling: Cursitor, a litigation desk for Claude Code, https://nanobotco.github.io/cursitor/
+
+Text CC BY 4.0, code MIT.

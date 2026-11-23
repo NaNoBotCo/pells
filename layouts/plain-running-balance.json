@@ -1,0 +1,20 @@
+{
+  "name": "plain-running-balance",
+  "label": "One line per transaction, with a running balance",
+  "note": "Copy this file to add a bank. Change detect so it matches a phrase printed on that bank's pages, then the patterns under it.",
+  "priority": 80,
+  "detect": "Statement Period",
+  "carry": true,
+  "account": "Account Number:?\\s*([0-9Xx*\\-]{4,})",
+  "period": "Statement Period:?\\s*(\\d{1,2})/(\\d{1,2})/(\\d{2,4})\\s*(?:to|-|through)\\s*(\\d{1,2})/(\\d{1,2})/(\\d{2,4})",
+  "period_groups": ["m", "d", "y", "m", "d", "y"],
+  "begin": "(?:Beginning|Opening|Previous) Balance:?\\s*(-?\\$?[\\d,]+\\.\\d{2})",
+  "end": "(?:Ending|Closing|New) Balance:?\\s*(-?\\$?[\\d,]+\\.\\d{2})",
+  "balance_kind": "asset",
+  "txn": {
+    "style": "line",
+    "sign": "balance",
+    "row": "^\\s*(?P<m>\\d{1,2})/(?P<d>\\d{1,2})(?:/(?P<y>\\d{2,4}))?\\s+(?P<desc>\\S.*?)\\s+(?P<amt>\\(?-?\\$?[\\d,]+\\.\\d{2}\\)?-?(?:\\s?(?:CR|DR))?)\\s+(?P<bal>-?\\$?[\\d,]+\\.\\d{2})\\s*$",
+    "skip": ["beginning balance", "ending balance", "opening balance", "closing balance"]
+  }
+}

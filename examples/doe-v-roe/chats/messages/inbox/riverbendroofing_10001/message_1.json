@@ -1,0 +1,33 @@
+{
+ "participants": [
+  {
+   "name": "Jane Doe"
+  },
+  {
+   "name": "Riverbend Roofing"
+  }
+ ],
+ "title": "Riverbend Roofing",
+ "messages": [
+  {
+   "sender_name": "Riverbend Roofing",
+   "timestamp_ms": 1768435200000,
+   "content": "Got it, thanks. Crew is booked for Thursday."
+  },
+  {
+   "sender_name": "Jane Doe",
+   "timestamp_ms": 1768348800000,
+   "content": "Go ahead. Paid the invoice today, receipt attached."
+  },
+  {
+   "sender_name": "Riverbend Roofing",
+   "timestamp_ms": 1768003200000,
+   "content": "Estimate is $1,850 for tear-off and re-roof."
+  },
+  {
+   "sender_name": "Jane Doe",
+   "timestamp_ms": 1767916800000,
+   "content": "Can you quote the north slope? Shingles are lifting."
+  }
+ ]
+}

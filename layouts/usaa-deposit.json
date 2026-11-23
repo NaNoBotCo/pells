@@ -1,0 +1,20 @@
+{
+  "name": "usaa-deposit",
+  "label": "USAA deposit account statement",
+  "priority": 20,
+  "detect": "for Account Number:",
+  "carry": false,
+  "account": "for Account Number:\\s*([0-9]+)",
+  "period": "Statement Period:\\s*(\\d{2})/(\\d{2})/(\\d{4})\\s*to\\s*(\\d{2})/(\\d{2})/(\\d{4})",
+  "period_groups": ["m", "d", "y", "m", "d", "y"],
+  "begin": "Beginning Balance\\s*\\$?(-?[\\d,]+\\.\\d{2})",
+  "end": "Ending Balance\\s*\\$?(-?[\\d,]+\\.\\d{2})",
+  "balance_kind": "asset",
+  "txn": {
+    "style": "block",
+    "start": "^(\\d{2})/(\\d{2})\\s+(.*)$",
+    "money": "\\$([\\d,]+\\.\\d{2})",
+    "credit_rule": "two_on_last_line",
+    "skip": ["Beginning Balance", "Ending Balance", "Total for this"]
+  }
+}
