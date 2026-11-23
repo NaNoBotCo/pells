@@ -1,0 +1,146 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Contents 5 0 R
+/MediaBox [ 0 0 612 792 ]
+/Resources <<
+/Font <<
+/F1 6 0 R
+/F1-0 7 0 R
+/F2 8 0 R
+/F2-0 9 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+5 0 obj
+<<
+/Length 1568
+>>
+stream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+BT /F2 9 Tf 10.8 TL ET
+BT 1 0 0 1 54 740 Tm (Harbor Example Bank                                  Page 1 of 1) Tj T* ET
+BT 1 0 0 1 54 727 Tm (Account Number: 000111222333) Tj T* ET
+BT 1 0 0 1 54 714 Tm (Statement Period: 02/01/2026 to 02/28/2026) Tj T* ET
+BT 1 0 0 1 54 701 Tm (Beginning Balance $5,594.28) Tj T* ET
+BT 1 0 0 1 54 688 Tm (Ending Balance $7,407.27) Tj T* ET
+BT 1 0 0 1 54 675 Tm  T* ET
+BT 1 0 0 1 54 662 Tm (Date   Description                                      Amount       Balance) Tj T* ET
+BT 1 0 0 1 54 649 Tm (02/03  PAYROLL DEPOSIT ROE HOLDINGS                   2,100.00      7,694.28) Tj T* ET
+BT 1 0 0 1 54 636 Tm (02/04  COUNTY TAX COLLECTOR PROPERTY TAX              1,422.18      6,272.10) Tj T* ET
+BT 1 0 0 1 54 623 Tm (02/09  NORTHFORK ELECTRIC COOP AUTOPAY                  142.87      6,129.23) Tj T* ET
+BT 1 0 0 1 54 610 Tm (02/11  LUMBER AND SUPPLY CO                             389.60      5,739.63) Tj T* ET
+BT 1 0 0 1 54 597 Tm (02/12  CITY WATER DISTRICT                               61.05      5,678.58) Tj T* ET
+BT 1 0 0 1 54 584 Tm (02/17  PAYROLL DEPOSIT ROE HOLDINGS                   2,100.00      7,778.58) Tj T* ET
+BT 1 0 0 1 54 571 Tm (02/19  DELTA PLUMBING SERVICE CALL                      275.00      7,503.58) Tj T* ET
+BT 1 0 0 1 54 558 Tm (02/24  GROCERY OUTLET                                    96.31      7,407.27) Tj T* ET
+ 
+
+Q
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+BT
+/F2-0 9 Tf
+10.8 TL
+ET
+BT
+1 0 0 1 536.473 20 Tm
+(DOE000002) Tj
+T*
+ET
+Q
+
+endstream
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+7 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Courier
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+9 0 obj
+<<
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000113 00000 n 
+0000000162 00000 n 
+0000000407 00000 n 
+0000002027 00000 n 
+0000002134 00000 n 
+0000002241 00000 n 
+0000002346 00000 n 
+trailer
+<<
+/Size 10
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+2458
+%%EOF

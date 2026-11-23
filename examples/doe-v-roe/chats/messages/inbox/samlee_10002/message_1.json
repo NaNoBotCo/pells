@@ -1,0 +1,23 @@
+{
+ "participants": [
+  {
+   "name": "Jane Doe"
+  },
+  {
+   "name": "Sam Lee"
+  }
+ ],
+ "title": "Sam Lee",
+ "messages": [
+  {
+   "sender_name": "Sam Lee",
+   "timestamp_ms": 1769040000000,
+   "content": "Trivia night Friday?"
+  },
+  {
+   "sender_name": "Jane Doe",
+   "timestamp_ms": 1769043600000,
+   "content": "Yes. I'll bring the roof story."
+  }
+ ]
+}

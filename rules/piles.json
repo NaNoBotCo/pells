@@ -1,0 +1,21 @@
+{
+  "note": "A starting set. The first pile that matches a line takes it. Copy this file into a work folder as piles.json and edit it for the matter: add the vendors and places that matter there.",
+  "piles": [
+    {"pile": "Checks: paper, no payee on the line", "patterns": ["\\bCHECK\\s*#?\\s*\\d+"]},
+    {"pile": "Cash: ATM and counter, no payee", "patterns": ["ATM W(ITH)?D", "ATM WITHDRAWAL", "CASH WITHDRAWAL", "COUNTER WITHDRAWAL"]},
+    {"pile": "Transfers between accounts and people", "patterns": ["\\bTRANSFER\\b", "\\bXFER\\b", "ZELLE", "VENMO", "PAYPAL", "CASH APP", "\\bWIRE\\b"]},
+    {"pile": "Housing: mortgage, rent, escrow", "patterns": ["MORTGAGE", "\\bMTG\\b", "\\bRENT\\b", "ESCROW", "HOME LOAN", "\\bHOA\\b"]},
+    {"pile": "Property tax and other tax", "patterns": ["TAX COLLECTOR", "PROPERTY TAX", "COUNTY TAX", "\\bIRS\\b", "FRANCHISE TAX", "TREASURER"]},
+    {"pile": "Insurance", "patterns": ["INSURANCE", "\\bINS\\b", "HOMEOWNERS", "ASSURANCE"]},
+    {"pile": "Utilities: electric, gas, propane", "patterns": ["ELECTRIC", "\\bPOWER\\b", "ENERGY", "PROPANE", "\\bGAS CO", "PG ?& ?E", "EDISON", "UTILIT"]},
+    {"pile": "Utilities: water, sewer, trash", "patterns": ["\\bWATER\\b", "SEWER", "DISPOSAL", "\\bWASTE\\b", "SANITATION", "GARBAGE"]},
+    {"pile": "Utilities: phone, internet", "patterns": ["COMCAST", "XFINITY", "SPECTRUM", "INTERNET", "BROADBAND", "WIRELESS", "TELEPHONE", "\\bAT ?& ?T\\b", "VERIZON", "T-MOBILE"]},
+    {"pile": "Building trades: roof, paving, plumbing, electric, trees", "patterns": ["ROOF", "PAVING", "ASPHALT", "CONCRETE", "PLUMB", "ELECTRICIAN", "\\bHVAC\\b", "HEATING", "TREE", "FENC", "CONTRACT", "CONSTRUCTION", "EXCAVAT", "SEPTIC", "PAINT", "FLOORING", "DRYWALL", "WELD", "FABRICAT"]},
+    {"pile": "Hardware, lumber, building supply", "patterns": ["HARDWARE", "LUMBER", "HOME DEPOT", "LOWE'?S", "\\bACE\\b", "SUPPLY", "BUILDING MATERIAL", "NURSERY"]},
+    {"pile": "Furnishings and appliances", "patterns": ["FURNITURE", "APPLIANCE", "MATTRESS", "IKEA", "WAYFAIR"]},
+    {"pile": "Vehicle: loan, fuel, repair", "patterns": ["AUTO LOAN", "VEHICLE LOAN", "\\bFUEL\\b", "GASOLINE", "AUTO PARTS", "TIRE", "SMOG", "\\bDMV\\b"]},
+    {"pile": "Lodging and short-term rental", "patterns": ["AIRBNB", "VRBO", "HOTEL", "MOTEL", "\\bINN\\b", "LODG"]},
+    {"pile": "Pay and deposits in", "side": "credit", "patterns": ["PAYROLL", "DIRECT DEP", "\\bDEPOSIT\\b", "SALARY"]},
+    {"pile": "Interest and bank fees", "patterns": ["INTEREST", "\\bFEE\\b", "SERVICE CHARGE", "OVERDRAFT", "REBATE"]}
+  ]
+}

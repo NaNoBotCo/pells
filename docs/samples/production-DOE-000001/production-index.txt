@@ -1,0 +1,17 @@
+PRODUCTION INDEX
+DOE000001 to DOE000003. 3 pages in 3 files, from 4 marked lines.
+Unit: page, with each statement's first page.
+Next number: DOE000004
+
+DOE000001 to DOE000001   account …2333   2026-01-01 to 2026-01-31   1 page   2 marked lines
+    from eStatement_bundle.pdf p.1
+DOE000002 to DOE000002   account …2333   2026-02-01 to 2026-02-28   1 page   1 marked line
+    from document (2).pdf p.1
+DOE000003 to DOE000003   account …2333   2026-04-01 to 2026-04-30   1 page   1 marked line
+    from eStatement_bundle_2.pdf p.2
+
+PAGES OF THESE STATEMENTS LEFT OUT (no marked line on the page)
+account …2333   2026-01-01 to 2026-01-31   eStatement_bundle.pdf p.3
+
+Statements read with no marked line: 1.
+Pages are stamped as they are in the source; nothing on them is redacted.

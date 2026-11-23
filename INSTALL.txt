@@ -1,0 +1,46 @@
+PELLS — HOW TO SET IT UP ON A MAC
+
+Pells reads bank and card statements, checks each one's lines against its printed balances, and makes a numbered set of pages. It runs on your Mac.
+
+You need: a Mac, about 10 minutes, and this folder.
+
+STEP 1. Put the folder somewhere you will find it.
+
+Drag the "pells" folder into your Documents folder.
+
+STEP 2. Open Terminal.
+
+Press Command and Space together, type Terminal, press Return. A window with text opens.
+
+STEP 3. Install the two parts Pells uses.
+
+Copy this line, paste it into Terminal, press Return:
+
+python3 -m pip install --user pypdf reportlab
+
+If the Mac asks to install "command line developer tools", click Install and wait. Then run the line again.
+
+STEP 4. Open the window.
+
+In Finder, open the pells folder and double-click "Pells.command". Your browser opens a page titled Pells. If the Mac says the file is from an unidentified developer, right-click it, choose Open, then Open again.
+
+STEP 5. Try the example.
+
+Click "Try the example". Four made-up statements appear with their checks. Open a pile, tap a line until it says Produce, then click "Make the production".
+
+STEP 6. Read your own statements.
+
+Type the folder where your statement PDFs are, or drag the PDFs onto the dashed box, then click Read. What Pells writes goes into a folder named Pells-work in your home folder. Your statement files are opened for reading.
+
+IF A STATEMENT IS A SCAN
+
+A scan is a picture of a page with no text in it. Pells lists it under "Files not read". To give it text, install the reading tools (this needs Homebrew, brew.sh):
+
+brew install tesseract
+python3 -m pip install --user ocrmypdf
+
+Then, in Terminal: bin/pells ocr "the file.pdf"
+
+TO STOP
+
+Click the Terminal window and press Control and C together.

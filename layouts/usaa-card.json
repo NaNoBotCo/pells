@@ -1,0 +1,19 @@
+{
+  "name": "usaa-card",
+  "label": "USAA credit card statement",
+  "priority": 20,
+  "detect": "Statement Closing Date",
+  "carry": true,
+  "account": "(\\d{4})\\s*X+\\s*X+\\s*(\\d{4})",
+  "account_format": "card ****{1}",
+  "closing": "Statement Closing Date\\s*\\n\\s*(\\d{2})/(\\d{2})/(\\d{2})",
+  "closing_groups": ["m", "d", "y"],
+  "balance_kind": "owed",
+  "txn": {
+    "style": "stack",
+    "date": "^\\d{2}/\\d{2}$",
+    "ref": "^[A-Z0-9]{12,20}$",
+    "amount": "^\\$([\\d,]+\\.\\d{2})(-?)$",
+    "max_desc_lines": 5
+  }
+}

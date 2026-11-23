@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pells</title>
+<meta name="description" content="Bank and card statements in. A ledger checked against the printed balances, and a Bates-numbered set of pages, out. A kit for a Mac, shown here on a made-up matter.">
+<link rel="canonical" href="https://nanobotco.github.io/pells/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="NaNoBotCo">
+<meta property="og:title" content="Pells · เพลส์">
+<meta property="og:description" content="Statements in; a checked ledger and a numbered production out. · จากใบแจ้งยอดสู่ชุดเอกสารใส่เลขหน้า">
+<meta property="og:url" content="https://nanobotco.github.io/pells/">
+<meta property="og:image" content="https://nanobotco.github.io/pells/card.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A ledger sheet with ruled columns and the word Pells.">
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="th_TH">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://nanobotco.github.io/pells/card.jpg">
+<link rel="alternate" type="text/plain" href="https://nanobotco.github.io/pells/llms.txt" title="llms.txt">
+<style>
+:root { --ink:#111; --paper:#fffdf6; --card:#fff; --line:#c9c2ae; --gold:#f2b705; --good:#0b6b2e; --bad:#a3120a; --ask:#7a4b00; --mute:#4a4a4a; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--paper); color:var(--ink); font:20px/1.5 -apple-system, "Helvetica Neue", "Thonburi", "Noto Sans Thai", sans-serif; }
+header { display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; padding:20px 16px 4px; max-width:1040px; margin:0 auto; }
+h1 { font-size:34px; margin:0; letter-spacing:.5px; }
+header p { margin:0; flex:1 1 320px; }
+main { max-width:1040px; margin:0 auto; padding:8px 16px 60px; }
+section { background:var(--card); border:2px solid var(--ink); border-radius:10px; padding:16px; margin:16px 0; }
+h2 { font-size:24px; margin:0 0 10px; }
+button, .btn { font:inherit; font-weight:700; color:#000; background:var(--gold); border:2px solid #000; border-radius:8px; padding:10px 18px; cursor:pointer; min-height:48px; }
+button.plain { background:#fff; }
+button:disabled { opacity:.45; cursor:default; }
+input[type=text], input[type=number], select { font:inherit; padding:9px 10px; border:2px solid var(--ink); border-radius:8px; min-height:48px; background:#fff; color:#000; }
+input[type=text] { flex:1 1 280px; min-width:0; }
+.row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:8px 0; }
+#drop { border:3px dashed var(--ink); border-radius:10px; padding:18px; text-align:center; margin:10px 0; }
+#drop.over { background:#fff3c4; }
+.scroll { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; font-size:18px; }
+th, td { text-align:left; padding:6px 10px; border-bottom:1px solid var(--line); white-space:nowrap; }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+.good { color:var(--good); font-weight:700; } .bad { color:var(--bad); font-weight:700; }
+.note { color:var(--mute); font-size:17px; margin:6px 0; }
+ul { margin:6px 0; padding-left:22px; }
+details { border-top:1px solid var(--line); padding:6px 0; }
+summary { cursor:pointer; font-weight:700; padding:6px 0; }
+summary span { font-weight:400; color:var(--mute); }
+.line { display:flex; gap:10px; align-items:center; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:8px 10px; margin:6px 0; font-weight:400; min-height:52px; }
+.line .chip { flex:0 0 118px; text-align:center; font-weight:700; border:2px solid #000; border-radius:999px; padding:2px 6px; background:#fff; font-size:16px; }
+.line[data-mark=y] { background:#e5f6e9; } .line[data-mark=y] .chip { background:var(--good); color:#fff; }
+.line[data-mark=n] { background:#f3f3f3; } .line[data-mark=n] .chip { background:#000; color:#fff; }
+.line[data-mark="?"] { background:#fff3c4; } .line[data-mark="?"] .chip { background:var(--gold); color:#000; }
+.line .what { flex:1 1 auto; min-width:0; overflow-wrap:anywhere; }
+.line .amt { flex:0 0 auto; font-variant-numeric:tabular-nums; font-weight:700; }
+.line small { color:var(--mute); display:block; }
+pre { white-space:pre-wrap; overflow-wrap:anywhere; background:#f7f4ea; border:1px solid var(--line); border-radius:8px; padding:12px; font:15px/1.45 ui-monospace, Menlo, monospace; max-height:420px; overflow:auto; }
+#msg { position:sticky; top:0; z-index:5; background:#000; color:#fff; padding:10px 16px; display:none; font-weight:700; }
+a { color:#00357a; font-weight:700; }
+a.btn { display:inline-block; text-decoration:none; }
+body.demo .kit { display:none; }
+@media (max-width:560px) { body { font-size:18px; } .line { flex-wrap:wrap; } .line .chip { flex-basis:100%; } }
+</style>
+</head>
+<body>
+<div id="msg" role="status"></div>
+<header>
+  <h1>Pells</h1>
+  <p data-t="tag"></p>
+  <button class="plain" id="lang" aria-label="Language">ไทย</button>
+</header>
+<main>
+  <section id="demobar" hidden>
+    <p data-t="demo1"></p>
+    <p class="note" data-t="demo2"></p>
+    <div class="row"><a class="btn" id="kit" data-t="getkit"></a></div>
+  </section>
+
+  <section id="s1sec">
+    <h2 data-t="s1"></h2>
+    <p class="note kit" data-t="s1note"></p>
+    <div class="row">
+      <input type="text" id="folder" class="kit" data-ph="folder_ph" autocomplete="off">
+      <button id="read" class="kit" data-t="read"></button>
+      <button class="plain" id="example" data-t="example"></button>
+    </div>
+    <div id="drop" class="kit" data-t="drop"></div>
+  </section>
+
+  <section id="s2" hidden>
+    <h2 data-t="s2"></h2>
+    <p id="totals"></p>
+    <div class="scroll"><table>
+      <thead><tr><th data-t="acct"></th><th data-t="period"></th><th class="num" data-t="lines"></th><th class="num" data-t="open"></th><th class="num" data-t="close"></th><th data-t="check"></th></tr></thead>
+      <tbody id="stmts"></tbody>
+    </table></div>
+    <p class="note" data-t="checknote"></p>
+    <div id="flags"></div>
+  </section>
+
+  <section id="s3" hidden>
+    <h2 data-t="s3"></h2>
+    <p class="note" data-t="s3note"></p>
+    <p><strong id="marked"></strong></p>
+    <div id="piles"></div>
+  </section>
+
+  <section id="s4" hidden>
+    <h2 data-t="s4"></h2>
+    <p class="note" data-t="s4note"></p>
+    <div class="row kit">
+      <label><span data-t="prefix"></span> <input type="text" id="prefix" value="DOE" style="flex:0 0 130px;width:130px"></label>
+      <label><span data-t="start"></span> <input type="number" id="start" value="1" min="1" style="width:130px"></label>
+      <select id="unit"><option value="page" data-t="unit_page"></option><option value="statement" data-t="unit_stmt"></option></select>
+    </div>
+    <div class="row kit">
+      <label><input type="checkbox" id="first" style="width:24px;height:24px"> <span data-t="first"></span></label>
+      <label><input type="checkbox" id="replace" style="width:24px;height:24px"> <span data-t="replace"></span></label>
+    </div>
+    <div class="row"><button id="make" data-t="make"></button></div>
+    <p class="note" id="demoprod" data-t="demoprod" hidden></p>
+    <div id="prods"></div>
+    <pre id="prodtext" hidden></pre>
+  </section>
+
+  <section id="s5" hidden>
+    <h2 data-t="s5"></h2>
+    <p class="note" data-t="s5note"></p>
+    <div class="row"><input type="text" id="rfolder" class="kit" data-ph="rfolder_ph" autocomplete="off"><button id="rgo" class="kit" data-t="pair"></button><button class="plain" id="rex" data-t="example"></button></div>
+    <pre id="rtext" hidden></pre>
+  </section>
+
+  <section id="s6" hidden>
+    <h2 data-t="s6"></h2>
+    <p class="note" data-t="s6note"></p>
+    <div class="row"><input type="text" id="cfolder" class="kit" data-ph="cfolder_ph" autocomplete="off"><button id="cgo" class="kit" data-t="search"></button><button class="plain" id="cex" data-t="example"></button></div>
+    <pre id="ctext" hidden></pre>
+  </section>
+
+  <section id="s7" hidden>
+    <h2 data-t="s7"></h2>
+    <p class="note" data-t="s7note"></p>
+    <pre id="log"></pre>
+  </section>
+</main>
+<script>
+const TOKEN = "";
+const DEMO = {"kit": "https://github.com/NaNoBotCo/pells", "state": {"work": "Pells-work", "has_ledger": true, "statements": [{"acct": "…2333", "start": "2026-01-01", "end": "2026-01-31", "lines": 12, "begin": "$5,000.00", "close": "$5,594.28", "check": "reconciled"}, {"acct": "…2333", "start": "2026-02-01", "end": "2026-02-28", "lines": 8, "begin": "$5,594.28", "close": "$7,407.27", "check": "reconciled"}, {"acct": "…2333", "start": "2026-04-01", "end": "2026-04-30", "lines": 4, "begin": "$7,717.71", "close": "$6,653.80", "check": "off by $488.14"}, {"acct": "…5666", "start": "2026-01-01", "end": "2026-01-31", "lines": 2, "begin": "$12,000.00", "close": "$12,301.12", "check": "reconciled"}], "gaps": [{"acct": "…2333", "kind": "gap", "from": "2026-03-01", "to": "2026-03-31"}], "not_read": [{"file": "IMG_0417.pdf", "sha256": "08406a7d6118b62188797cddc46e34f9485eb7aab124631855a3e692d8797b2d", "pages": 1, "status": "no text layer (a scan); run OCR first", "copy_of": null}, {"file": "document (3).pdf", "sha256": "f43d16364bb6dffd1535014cf0e8d2725e1897e1a5414072ca8cd9ad8eb52890", "pages": 1, "status": "same file as an earlier one", "copy_of": "document (2).pdf"}], "unread_pages": [], "piles": [{"pile": "Checks: paper, no payee on the line", "lines": [{"id": "8abf48fd", "mark": "", "date": "2026-01-22", "acct": "…2333", "debit": "600.00", "credit": "", "desc": "CHECK # 1042", "file": "eStatement_bundle.pdf", "page": "3"}]}, {"pile": "Cash: ATM and counter, no payee", "lines": [{"id": "390052b0", "mark": "", "date": "2026-01-20", "acct": "…2333", "debit": "200.00", "credit": "", "desc": "ATM WITHDRAWAL 5TH ST", "file": "eStatement_bundle.pdf", "page": "3"}]}, {"pile": "Transfers between accounts and people", "lines": [{"id": "a110f6cf", "mark": "", "date": "2026-01-30", "acct": "…2333", "debit": "300.00", "credit": "", "desc": "TRANSFER TO SAVINGS 6666", "file": "eStatement_bundle.pdf", "page": "3"}, {"id": "0bca0a08", "mark": "", "date": "2026-01-30", "acct": "…5666", "debit": "", "credit": "300.00", "desc": "TRANSFER FROM CHECKING 2333", "file": "eStatement_bundle.pdf", "page": "2"}]}, {"pile": "Property tax and other tax", "lines": [{"id": "f8263322", "mark": "", "date": "2026-02-04", "acct": "…2333", "debit": "1422.18", "credit": "", "desc": "COUNTY TAX COLLECTOR PROPERTY TAX", "file": "document (2).pdf", "page": "1"}]}, {"pile": "Insurance", "lines": [{"id": "cf7f22a3", "mark": "", "date": "2026-01-27", "acct": "…2333", "debit": "212.00", "credit": "", "desc": "OAKLINE INSURANCE HOMEOWNERS", "file": "eStatement_bundle.pdf", "page": "3"}]}, {"pile": "Utilities: electric, gas, propane", "lines": [{"id": "b44713c5", "mark": "", "date": "2026-01-09", "acct": "…2333", "debit": "131.22", "credit": "", "desc": "NORTHFORK ELECTRIC COOP AUTOPAY", "file": "eStatement_bundle.pdf", "page": "1"}, {"id": "5d80ada3", "mark": "", "date": "2026-02-09", "acct": "…2333", "debit": "142.87", "credit": "", "desc": "NORTHFORK ELECTRIC COOP AUTOPAY", "file": "document (2).pdf", "page": "1"}, {"id": "b9c3df48", "mark": "", "date": "2026-04-09", "acct": "…2333", "debit": "118.02", "credit": "", "desc": "NORTHFORK ELECTRIC COOP AUTOPAY", "file": "eStatement_bundle_2.pdf", "page": "2"}]}, {"pile": "Utilities: water, sewer, trash", "lines": [{"id": "18aa5932", "mark": "", "date": "2026-01-12", "acct": "…2333", "debit": "58.40", "credit": "", "desc": "CITY WATER DISTRICT", "file": "eStatement_bundle.pdf", "page": "1"}, {"id": "828f4b7f", "mark": "", "date": "2026-02-12", "acct": "…2333", "debit": "61.05", "credit": "", "desc": "CITY WATER DISTRICT", "file": "document (2).pdf", "page": "1"}, {"id": "1cae2fbc", "mark": "", "date": "2026-04-13", "acct": "…2333", "debit": "57.75", "credit": "", "desc": "CITY WATER DISTRICT", "file": "eStatement_bundle_2.pdf", "page": "2"}]}, {"pile": "Building trades: roof, paving, plumbing, electric, trees", "lines": [{"id": "2661bb60", "mark": "y", "date": "2026-01-05", "acct": "…2333", "debit": "245.10", "credit": "", "desc": "HARDWARE DEPOT #114 ROOFING NAILS", "file": "eStatement_bundle.pdf", "page": "1"}, {"id": "921ecc5b", "mark": "y", "date": "2026-01-15", "acct": "…2333", "debit": "1850.00", "credit": "", "desc": "RIVERBEND ROOFING CO", "file": "eStatement_bundle.pdf", "page": "1"}, {"id": "2f7d708a", "mark": "y", "date": "2026-02-19", "acct": "…2333", "debit": "275.00", "credit": "", "desc": "DELTA PLUMBING SERVICE CALL", "file": "document (2).pdf", "page": "1"}, {"id": "0ee7e5c7", "mark": "y", "date": "2026-04-07", "acct": "…2333", "debit": "2500.00", "credit": "", "desc": "PAVING BROTHERS DRIVEWAY DEPOSIT", "file": "eStatement_bundle_2.pdf", "page": "2"}]}, {"pile": "Hardware, lumber, building supply", "lines": [{"id": "cf58a6cb", "mark": "", "date": "2026-02-11", "acct": "…2333", "debit": "389.60", "credit": "", "desc": "LUMBER AND SUPPLY CO", "file": "document (2).pdf", "page": "1"}]}, {"pile": "Pay and deposits in", "lines": [{"id": "4a30a266", "mark": "", "date": "2026-01-03", "acct": "…2333", "debit": "", "credit": "2100.00", "desc": "PAYROLL DEPOSIT ROE HOLDINGS", "file": "eStatement_bundle.pdf", "page": "1"}, {"id": "9e39e9f5", "mark": "", "date": "2026-01-17", "acct": "…2333", "debit": "", "credit": "2100.00", "desc": "PAYROLL DEPOSIT ROE HOLDINGS", "file": "eStatement_bundle.pdf", "page": "1"}, {"id": "6a268b03", "mark": "", "date": "2026-02-03", "acct": "…2333", "debit": "", "credit": "2100.00", "desc": "PAYROLL DEPOSIT ROE HOLDINGS", "file": "document (2).pdf", "page": "1"}, {"id": "55307cc8", "mark": "", "date": "2026-02-17", "acct": "…2333", "debit": "", "credit": "2100.00", "desc": "PAYROLL DEPOSIT ROE HOLDINGS", "file": "document (2).pdf", "page": "1"}, {"id": "d766c535", "mark": "", "date": "2026-04-03", "acct": "…2333", "debit": "", "credit": "2100.00", "desc": "PAYROLL DEPOSIT ROE HOLDINGS", "file": "eStatement_bundle_2.pdf", "page": "2"}]}, {"pile": "Interest and bank fees", "lines": [{"id": "3dae0cca", "mark": "", "date": "2026-01-31", "acct": "…5666", "debit": "", "credit": "1.12", "desc": "INTEREST PAID", "file": "eStatement_bundle.pdf", "page": "2"}]}, {"pile": "No pile: read by hand", "lines": [{"id": "d34f22e6", "mark": "", "date": "2026-01-06", "acct": "…2333", "debit": "4.50", "credit": "", "desc": "COFFEE CART 5TH ST", "file": "eStatement_bundle.pdf", "page": "1"}, {"id": "7e26c05e", "mark": "", "date": "2026-01-06", "acct": "…2333", "debit": "4.50", "credit": "", "desc": "COFFEE CART 5TH ST", "file": "eStatement_bundle.pdf", "page": "1"}, {"id": "f196aabb", "mark": "", "date": "2026-02-24", "acct": "…2333", "debit": "96.31", "credit": "", "desc": "GROCERY OUTLET", "file": "document (2).pdf", "page": "1"}]}], "productions": [], "log": "SEARCH LOG\nTimes are UTC. Oldest first.\n\n2026-11-23T09:16:57Z  read statements\n  source: pells/examples/doe-v-roe/statements\n  files: 5\n  files read: 3\n  pages: 8\n  statements: 4\n  lines: 26\n  pages not read: 0\n  repeat pages: 1\n  files not read: 2\n    IMG_0417.pdf: no text layer (a scan); run OCR first\n    document (3).pdf: same file as an earlier one\n", "example": true, "folder": "pells/examples/doe-v-roe/statements", "totals": {"files": 5, "pages": 8, "statements": 4, "lines": 26, "repeat_pages": 1}}, "productions": [{"range": "DOE000001 to DOE000003", "next": "DOE000004", "index": "production-DOE-000001/production-index.txt", "files": ["production-DOE-000001/DOE000001-DOE000001_acct-2333_2026-01.pdf", "production-DOE-000001/DOE000002-DOE000002_acct-2333_2026-02.pdf", "production-DOE-000001/DOE000003-DOE000003_acct-2333_2026-04.pdf"]}], "production_text": "PRODUCTION INDEX\nDOE000001 to DOE000003. 3 pages in 3 files, from 4 marked lines.\nUnit: page, with each statement's first page.\nNext number: DOE000004\n\nDOE000001 to DOE000001   account …2333   2026-01-01 to 2026-01-31   1 page   2 marked lines\n    from eStatement_bundle.pdf p.1\nDOE000002 to DOE000002   account …2333   2026-02-01 to 2026-02-28   1 page   1 marked line\n    from document (2).pdf p.1\nDOE000003 to DOE000003   account …2333   2026-04-01 to 2026-04-30   1 page   1 marked line\n    from eStatement_bundle_2.pdf p.2\n\nPAGES OF THESE STATEMENTS LEFT OUT (no marked line on the page)\naccount …2333   2026-01-01 to 2026-01-31   eStatement_bundle.pdf p.3\n\nStatements read with no marked line: 1.\nPages are stamped as they are in the source; nothing on them is redacted.\n", "receipts": "RECEIPTS\nFolder: pells/examples/doe-v-roe/receipts\n4 files. 3 paired with one ledger line. Window: 3 days before the receipt's date to 10 days after.\n\ndelta-plumbing.txt — paired\n    Delta Plumbing   2026-02-18   $275.00\n    ledger: 2026-02-19 …2333 DELTA PLUMBING SERVICE CALL\nlumber-and-supply.pdf — paired\n    LUMBER AND SUPPLY CO   2026-02-10   $389.60\n    ledger: 2026-02-11 …2333 LUMBER AND SUPPLY CO\nriverbend-invoice.txt — paired\n    RIVERBEND ROOFING CO   2026-01-14   $1,850.00\n    ledger: 2026-01-15 …2333 RIVERBEND ROOFING CO\ntree-crew-cash.txt — no ledger line for this amount in the window\n    Hillside Tree Crew   2026-03-08   $900.00\n", "chats": "CHATS\nFolder: pells/examples/doe-v-roe/chats\nWords: pells/rules/chat_terms.json\n3 threads read. 3 carry a subject word. 0 do not.\nA tier is a pile for reading; the staged copies are in chats-staged/.\n\nA  Riverbend Roofing  2026-01-09 to 2026-01-15  4 messages, 2 on the subject  [paid or hired]  A-Riverbend-Roofing.txt\nA  paving-brothers  2026-04-02 to 2026-04-28  4 messages, 2 on the subject  [paid or hired]  A-paving-brothers.txt\nC  Sam Lee  2026-01-22 to 2026-01-22  2 messages, 1 on the subject  [subject words only]  C-Sam-Lee.txt\n", "log": "SEARCH LOG\nTimes are UTC. Oldest first.\n\n2026-11-23T09:16:57Z  read statements\n  source: pells/examples/doe-v-roe/statements\n  files: 5\n  files read: 3\n  pages: 8\n  statements: 4\n  lines: 26\n  pages not read: 0\n  repeat pages: 1\n  files not read: 2\n    IMG_0417.pdf: no text layer (a scan); run OCR first\n    document (3).pdf: same file as an earlier one\n\n2026-11-23T09:16:57Z  production made\n  source: Pells-work/production-DOE-000001\n  range: DOE000001 to DOE000003\n  pages: 3\n  files: 3\n  marked lines: 4\n  statements with no marked line: 1\n\n2026-11-23T09:16:57Z  receipts paired\n  source: pells/examples/doe-v-roe/receipts\n  files: 4\n  paired: 3\n  not paired: 1\n    tree-crew-cash.txt: no ledger line for this amount in the window\n\n2026-11-23T09:16:57Z  chats searched\n  source: pells/examples/doe-v-roe/chats\n  threads read: 3\n  threads taken: 3\n  threads without a subject word: 0\n  tier A: 2\n  tier C: 1\n"}; // scripts/make_site.py puts the example matter here for the public page
+const T = {
+ en: { tag:"Bank and card statements in. A ledger checked against the printed balances, and a numbered set of pages, out.",
+  s1:"1 · Statements", s1note:"Type the folder where the statement PDFs are, or drop the PDFs below. The files are opened for reading.",
+  folder_ph:"Folder of statement PDFs, e.g. ~/Documents/statements", read:"Read", example:"Try the example", drop:"Drop statement PDFs here",
+  s2:"2 · What was read", acct:"Account", period:"Period", lines:"Lines", open:"Opening", close:"Closing", check:"Check",
+  checknote:"Reconciled: the opening balance plus the lines equals the closing balance printed on the statement. Off by an amount: a page may be absent, or a line was misread.",
+  reconciled:"reconciled", gaps:"Gaps between statements", notread:"Files not read", unread:"Pages with amounts that no layout read", repeats:"Repeat pages counted once",
+  totals:(t)=>`${t.files} files · ${t.pages} pages · ${t.statements} statements · ${t.lines} lines`,
+  s3:"3 · Piles", s3note:"A pile is a word match: a reason to read a line. Tap a line to step through Produce, Leave out, Come back, blank.",
+  y:"Produce", n:"Leave out", "?":"Come back", "":"—", pileall:"Produce this pile", pileclear:"Clear this pile", marked:(n)=>`${n} lines marked Produce`,
+  s4:"4 · Numbered production", s4note:"Each page that carries a marked line gets a Bates number: a prefix and a running number, stamped at the lower right.",
+  prefix:"Prefix", start:"Start at", unit_page:"Pages with a marked line", unit_stmt:"Whole statements", first:"Add each statement's first page", replace:"Write over a production with the same number",
+  make:"Make the production", index:"Index", next:"Next number",
+  s5:"5 · Receipts", s5note:"Reads each receipt's date and total and pairs it with a ledger line for the same amount, 3 days before to 10 days after.", rfolder_ph:"Folder of receipts (.txt, .pdf, pictures)", pair:"Pair",
+  s6:"6 · Chats", s6note:"Searches a Messenger download or text exports for the subject words and sorts the threads into tiers for reading.", cfolder_ph:"Folder of the chat export", search:"Search",
+  s7:"Search log", s7note:"One entry for each thing read, with its counts, whether or not anything turned up.",
+  demo1:"This page shows Pells on a made-up matter, Doe v. Roe Holdings. Its bank, accounts, vendors and people are made up too.",
+  demo2:"The kit runs on a Mac and reads your own statements there.", getkit:"Get the kit",
+  demoprod:"This is the production the kit made from the marks this page opened with. The kit makes one from your own marks.",
+  working:"Working…", done:"Done", dr:"out", cr:"in" },
+ th: { tag:"ใส่ใบแจ้งยอดบัญชีธนาคารและบัตร ได้บัญชีรายการที่ตรวจกับยอดที่พิมพ์ไว้ และชุดเอกสารที่ใส่เลขหน้าแล้ว",
+  s1:"1 · ใบแจ้งยอด", s1note:"พิมพ์ชื่อโฟลเดอร์ที่เก็บไฟล์ PDF ใบแจ้งยอด หรือลากไฟล์มาวางด้านล่าง ไฟล์ถูกเปิดเพื่ออ่าน",
+  folder_ph:"โฟลเดอร์ใบแจ้งยอด เช่น ~/Documents/statements", read:"อ่าน", example:"ลองกับตัวอย่าง", drop:"ลากไฟล์ PDF ใบแจ้งยอดมาวางตรงนี้",
+  s2:"2 · อ่านอะไรได้บ้าง", acct:"บัญชี", period:"ช่วงวันที่", lines:"รายการ", open:"ยอดยกมา", close:"ยอดปิด", check:"ผลตรวจ",
+  checknote:"ยอดตรง: ยอดยกมารวมกับรายการแล้วเท่ากับยอดปิดที่พิมพ์บนใบแจ้งยอด ยอดต่างกัน: อาจมีหน้าที่ขาดไป หรืออ่านรายการผิด",
+  reconciled:"ยอดตรง", gaps:"ช่วงที่ไม่มีใบแจ้งยอด", notread:"ไฟล์ที่ไม่ได้อ่าน", unread:"หน้าที่มีตัวเลขเงินแต่ยังไม่มีรูปแบบอ่านได้", repeats:"หน้าซ้ำที่นับครั้งเดียว",
+  totals:(t)=>`${t.files} ไฟล์ · ${t.pages} หน้า · ${t.statements} ใบแจ้งยอด · ${t.lines} รายการ`,
+  s3:"3 · กองรายการ", s3note:"กองคือรายการที่มีคำตรงกัน เป็นเหตุให้เปิดอ่าน แตะรายการเพื่อเลือก ส่ง ไม่ส่ง กลับมาดู หรือเว้นว่าง",
+  y:"ส่ง", n:"ไม่ส่ง", "?":"กลับมาดู", "":"—", pileall:"ส่งทั้งกองนี้", pileclear:"ล้างกองนี้", marked:(n)=>`เลือกส่ง ${n} รายการ`,
+  s4:"4 · ชุดเอกสารใส่เลขหน้า", s4note:"หน้าที่มีรายการที่เลือกจะได้เลขเบตส์ คืออักษรนำหน้ากับเลขเรียง ประทับที่มุมล่างขวา",
+  prefix:"อักษรนำหน้า", start:"เริ่มที่เลข", unit_page:"เฉพาะหน้าที่มีรายการที่เลือก", unit_stmt:"ทั้งใบแจ้งยอด", first:"เพิ่มหน้าแรกของแต่ละใบแจ้งยอด", replace:"เขียนทับชุดที่ใช้เลขเดียวกัน",
+  make:"ทำชุดเอกสาร", index:"สารบัญ", next:"เลขถัดไป",
+  s5:"5 · ใบเสร็จ", s5note:"อ่านวันที่และยอดรวมของใบเสร็จ แล้วจับคู่กับรายการบัญชีที่ยอดเท่ากัน ตั้งแต่ 3 วันก่อนถึง 10 วันหลัง", rfolder_ph:"โฟลเดอร์ใบเสร็จ (.txt, .pdf, รูปภาพ)", pair:"จับคู่",
+  s6:"6 · ข้อความแชต", s6note:"ค้นไฟล์แชตจาก Messenger หรือไฟล์ข้อความ หาคำที่เกี่ยวกับเรื่อง แล้วจัดบทสนทนาเป็นชั้นไว้อ่าน", cfolder_ph:"โฟลเดอร์ไฟล์แชต", search:"ค้น",
+  s7:"บันทึกการค้น", s7note:"หนึ่งรายการต่อหนึ่งครั้งที่อ่าน พร้อมจำนวน ไม่ว่าจะพบอะไรหรือไม่",
+  demo1:"หน้านี้แสดง Pells กับคดีสมมติ Doe v. Roe Holdings ธนาคาร บัญชี ร้านค้า และบุคคลในตัวอย่างเป็นเรื่องสมมติเช่นกัน",
+  demo2:"ชุดโปรแกรมทำงานบนเครื่อง Mac และอ่านใบแจ้งยอดของคุณที่เครื่องนั้น", getkit:"รับชุดโปรแกรม",
+  demoprod:"นี่คือชุดเอกสารที่ชุดโปรแกรมทำจากรายการที่หน้านี้เลือกไว้ตอนเปิด ชุดโปรแกรมจะทำจากรายการที่คุณเลือกเอง",
+  working:"กำลังทำ…", done:"เสร็จแล้ว", dr:"ออก", cr:"เข้า" }
+};
+let lang = "en", S = null;
+try { lang = localStorage.getItem("pells-lang") || "en"; } catch (e) {}
+const $ = (id) => document.getElementById(id);
+const t = (k) => T[lang][k];
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const file = (rel) => DEMO ? "samples/" + rel.split("/").map(encodeURIComponent).join("/") : "/files?path=" + encodeURIComponent(rel) + "&t=" + TOKEN;
+const copy = (o) => JSON.parse(JSON.stringify(o));
+function demo(path) {
+  if (path === "/api/state" || path === "/api/read") return copy(DEMO.state);
+  if (path === "/api/mark") return {ok: true};
+  if (path === "/api/produce") { $("demoprod").hidden = false; return {text: DEMO.production_text, state: Object.assign(copy(S), {productions: copy(DEMO.productions)})}; }
+  if (path === "/api/receipts") return {text: DEMO.receipts, log: DEMO.log};
+  if (path === "/api/chats") return {text: DEMO.chats, log: DEMO.log};
+  throw new Error("not in this page");
+}
+
+function words() {
+  document.documentElement.lang = lang;
+  $("lang").textContent = lang === "en" ? "ไทย" : "English";
+  document.querySelectorAll("[data-t]").forEach((e) => { e.textContent = t(e.dataset.t); });
+  document.querySelectorAll("[data-ph]").forEach((e) => { e.placeholder = t(e.dataset.ph); });
+  if (S) render(S);
+}
+function say(text, ms) { const m = $("msg"); m.textContent = text; m.style.display = text ? "block" : "none"; if (ms) setTimeout(() => { m.style.display = "none"; }, ms); }
+async function api(path, body) {
+  if (DEMO) return demo(path);
+  const opt = body === undefined ? {} : { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(body) };
+  const r = await fetch(path + (path.includes("?") ? "&" : "?") + "t=" + TOKEN, opt);
+  const j = await r.json();
+  if (!r.ok) throw new Error(j.error || r.status);
+  return j;
+}
+async function run(fn) { say(t("working")); try { await fn(); say(t("done"), 1500); } catch (e) { say(String(e.message || e)); } }
+
+function render(s) {
+  S = s;
+  ["s2","s3","s4","s5","s6","s7"].forEach((id) => { $(id).hidden = !s.has_ledger; });
+  $("log").textContent = s.log || "";
+  if (!s.has_ledger) return;
+  $("totals").textContent = t("totals")(s.totals) + "  ·  " + s.folder;
+  $("stmts").innerHTML = s.statements.map((x) => {
+    const ok = x.check === "reconciled";
+    return `<tr><td>${esc(x.acct || "?")}</td><td>${esc(x.start || "?")} – ${esc(x.end || "?")}</td><td class="num">${x.lines}</td><td class="num">${esc(x.begin)}</td><td class="num">${esc(x.close)}</td><td class="${ok ? "good" : "bad"}">${ok ? esc(t("reconciled")) : esc(x.check)}</td></tr>`;
+  }).join("");
+  let f = "";
+  const list = (title, items) => items.length ? `<p><strong>${esc(title)}</strong></p><ul>${items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : "";
+  f += list(t("gaps"), s.gaps.map((g) => `${g.acct}  ${g.from} – ${g.to}`));
+  f += list(t("notread"), s.not_read.map((x) => `${x.file} — ${x.status}`));
+  f += list(t("unread"), s.unread_pages.map((u) => `${u.file} p.${u.page} — ${u.first_line || ""}`));
+  if (s.totals.repeat_pages) f += `<p class="note">${esc(t("repeats"))}: ${s.totals.repeat_pages}</p>`;
+  $("flags").innerHTML = f;
+  let marked = 0;
+  $("piles").innerHTML = s.piles.map((p, pi) => {
+    const y = p.lines.filter((l) => l.mark === "y").length; marked += y;
+    const rows = p.lines.map((l) => {
+      const amt = l.debit ? `${l.debit} ${t("dr")}` : l.credit ? `${l.credit} ${t("cr")}` : "";
+      return `<button class="line" data-id="${l.id}" data-mark="${esc(l.mark)}"><span class="chip">${esc(t(l.mark) || l.mark)}</span><span class="what">${esc(l.desc)}<small>${esc(l.date)} · ${esc(l.acct)} · ${esc(l.file)} p.${esc(l.page)}</small></span><span class="amt">${esc(amt)}</span></button>`;
+    }).join("");
+    return `<details ${p.open ? "open" : ""} data-pi="${pi}"><summary>${esc(p.pile)} <span>· ${p.lines.length} · ${y} ✓</span></summary><div class="row"><button class="plain" data-all="${pi}">${esc(t("pileall"))}</button><button class="plain" data-clear="${pi}">${esc(t("pileclear"))}</button></div>${rows}</details>`;
+  }).join("");
+  $("marked").textContent = t("marked")(marked);
+  $("prods").innerHTML = s.productions.map((p) => `<p><strong>${esc(p.range)}</strong> · ${esc(t("next"))}: ${esc(p.next)} · <a target="_blank" href="${file(p.index)}">${esc(t("index"))}</a></p><ul>${p.files.map((x) => `<li><a target="_blank" href="${file(x)}">${esc(x.split("/").pop())}</a></li>`).join("")}</ul>`).join("");
+}
+const NEXT = {"":"y", "y":"n", "n":"?", "?":""};
+async function mark(ids, value) { await api("/api/mark", {ids, value}); }
+$("piles").addEventListener("click", (ev) => {
+  const b = ev.target.closest("button"); if (!b) return;
+  const keepOpen = () => document.querySelectorAll("#piles details").forEach((d) => { S.piles[+d.dataset.pi].open = d.open; });
+  if (b.dataset.id) {
+    const v = NEXT[b.dataset.mark] === undefined ? "y" : NEXT[b.dataset.mark];
+    run(async () => { await mark([b.dataset.id], v); keepOpen(); S.piles.forEach((p) => p.lines.forEach((l) => { if (l.id === b.dataset.id) l.mark = v; })); render(S); });
+  } else if (b.dataset.all !== undefined || b.dataset.clear !== undefined) {
+    const pi = +(b.dataset.all !== undefined ? b.dataset.all : b.dataset.clear), v = b.dataset.all !== undefined ? "y" : "";
+    run(async () => { await mark(S.piles[pi].lines.map((l) => l.id), v); keepOpen(); S.piles[pi].lines.forEach((l) => { l.mark = v; }); render(S); });
+  }
+});
+$("lang").onclick = () => { lang = lang === "en" ? "th" : "en"; try { localStorage.setItem("pells-lang", lang); } catch (e) {} words(); };
+$("read").onclick = () => run(async () => render(await api("/api/read", {folder: $("folder").value})));
+$("example").onclick = () => run(async () => render(await api("/api/read", {example: true})));
+$("make").onclick = () => run(async () => {
+  const r = await api("/api/produce", {prefix: $("prefix").value, start: +$("start").value || 1, unit: $("unit").value, first_page: $("first").checked, replace: $("replace").checked});
+  $("prodtext").hidden = false; $("prodtext").textContent = r.text; render(r.state);
+});
+const side = (kind, pre, body) => run(async () => { const r = await api("/api/" + kind, body); $(pre).hidden = false; $(pre).textContent = r.text; $("log").textContent = r.log; if (S) S.log = r.log; });
+$("rgo").onclick = () => side("receipts", "rtext", {folder: $("rfolder").value});
+$("rex").onclick = () => side("receipts", "rtext", {example: true});
+$("cgo").onclick = () => side("chats", "ctext", {folder: $("cfolder").value});
+$("cex").onclick = () => side("chats", "ctext", {example: true});
+const drop = $("drop");
+["dragenter","dragover"].forEach((n) => drop.addEventListener(n, (e) => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave","drop"].forEach((n) => drop.addEventListener(n, (e) => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", (e) => run(async () => {
+  for (const f of e.dataTransfer.files) {
+    if (!/\.pdf$/i.test(f.name)) continue;
+    const r = await fetch("/api/upload?name=" + encodeURIComponent(f.name) + "&t=" + TOKEN, {method:"POST", body: f});
+    if (!r.ok) throw new Error((await r.json()).error);
+  }
+  render(await api("/api/read", {uploads: true}));
+}));
+if (DEMO) { document.body.classList.add("demo"); $("demobar").hidden = false; $("kit").href = DEMO.kit; }
+words();
+api("/api/state").then(render).catch((e) => say(String(e.message || e)));
+</script>
+</body>
+</html>
